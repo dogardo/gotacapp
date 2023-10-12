@@ -1,0 +1,278 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block styles %}
+<style>
+  /* Saydam siyah blok stil */
+  .grid-item {
+      position: relative;
+      max-height: 230px;
+      overflow: hidden;
+  }
+
+  .overlay {
+      position: absolute;
+      
+      right: 0;
+      height: 85%;
+      width: 75%;
+      margin-top: 4.5%;
+      background-color: rgba(255, 255, 255, 0.5); /* Siyah arka plan */
+      display: flex;
+      flex-direction: column; /* İç içe simgeleri alt alta yerleştirmek için */
+      align-items: right;
+      justify-content: right;
+      z-index: 10;
+  }
+
+  /* Görsel üzerine karartma eklemek için ::before pseudo-elementi */
+  .uk-background-cover::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 20px;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.2); /* Görseli biraz karartmak için arka plan rengi */
+  }
+
+  /* Yazı */
+  .overlay h4 {
+      text-align: left;
+      color: #075f92; /* Beyaz yazı rengi */
+      font-family: "Arial", sans-serif;
+      font-weight: normal;
+  }
+
+  .overlay h6 {
+      text-align: left;
+      color: #075f92; /* Beyaz yazı rengi */
+      font-family: "Arial", sans-serif;
+      font-weight: normal;
+  }
+
+  /* Simgeler */
+  .overlay img {
+      max-width: 100px;
+      margin: 5px 0;
+  }
+
+
+  .my-custom-icon {
+  font-size: 55px;
+}
+
+</style>
+{% endblock styles %}
+
+{% block w4for %}
+
+;height:170px;
+{% endblock w4for %}
+
+
+{% block forwelcome %}
+  <div style="margin-top: 20px;margin-bottom: -75px;margin-left: -50px;">
+
+  
+    <a href="/account/w/5/" style="color:#075f92 ;;font-family: 'Arial', sans-serif;font-weight: normal;">
+      
+      ( Adım 4 - <span uk-icon="icon: bolt;ratio:1" ></span> Filtrelenmiş Aktiviteler )  : Gideceğiniz Konuma Göre, İlgilendiğiniz Hashtag ve Sanatçıların Etkinliklerini Bu Duvardan
+    Takip Edebilirsiniz. Dilerseniz Büyütece Tıklayarak Bilet Satış Linkine Gidebilir, Dilerseniz Etkinlik Takibi İçin Etkinliğinizi Kaydedebilirsiniz. Bir Sonraki Adım İçin Tıklayınız. </a>
+       
+        </div>
+
+
+
+{% endblock forwelcome %}
+
+{% block forwelcome2 %}
+{% endblock forwelcome2 %}
+
+
+{% block body1 %}
+
+
+        <div style="margin-top: 170px;"></div>
+
+
+  {% if activities.all.count != 0 %}
+  <div class="grid-container"  >
+
+    {% for value in activities %}
+
+    <div class="filtering ">
+<div class="grid-item">    <div class="overlay" >
+
+
+
+
+
+
+
+  <div style="display: grid; grid-template-columns: 7.5fr 2.5fr; gap: 20px; margin-top: 10px;margin-left: 10px;">
+    <div>
+      <!-- Sol Kısım (%70) -->
+
+      <h4>{{value.name}} </h4>
+      <h6 style="margin-top:-4px"><i><a style="margin-right: 8px; ;"  href="/activities/hashtag" style="margin-left: 8px; ;" uk-icon="paint-bucket"></a></i> {{value.community}}  {% if value.community in request.user.wantToKnowComm.all %} <span uk-icon="icon: check;ratio:1" style="color:#075f92 ;"></span>{%endif%} </h6>
+      <h6 style="margin-top:-4px"> <i><a style="margin-right: 8px; ;"  href="/activities/hashtag" style="margin-left: 8px; ;" uk-icon="hashtag"></a></i> {{value.hashtag}}      {% if value.hashtag in request.user.wantToKnowHash.all %}<span uk-icon="icon: check;ratio:1" style="color:#075f92 ;"></span>{%endif%} </h6>
+      <h6 style="margin-top:-4px"><i><a style="margin-right: 8px; ;"  href="/activities/hashtag" style="margin-left: 8px;;" uk-icon="location"></a></i> {{value.place}}  {% if value.place in request.user.wantToKnowPlac.all %} <span uk-icon="icon: check;ratio:1" style="color:#075f92 ;"></span>{%endif%} </h6>
+      <h6 style="margin-top:-4px"><i><a style="margin-right: 8px; ;"  href="/activities/hashtag" style="margin-left: 8px; ;" uk-icon="clock"></a></i> {{ value.m_time|date:"d/m/Y H:i" }} </h6>
+  
+  
+    </div>
+    <div style="text-align: center;margin-top: 14px; margin-right: 25px;">
+
+        
+
+      <h6 style="margin-top: 30px">
+        <i><a style="margin-right: 8px; margin-left: 8px;" href="//{{ value.activity|safe }}" rel="noopener noreferrer" target="_blank"><span uk-icon="icon: search;ratio:1.4" style="color:#075f92 ;"></span></a></i>
+      </h6>
+
+        <h6 style="margin-top: 35px;margin-left: 10px;">
+          <i >
+          
+            {% if value not in request.user.IKnowAct.all %}
+ 
+            <a href="javascript:void(0);" onclick="toggleActivity({{ value.id }});" class="activity-button" data-hashtag-id="{{ value.id }}" uk-icon="icon: bookmark;ratio:1.4"></a>
+            
+            {% else %}
+        
+              
+          
+              <a href="javascript:void(0);" onclick="toggleActivity({{ value.id }});" class="activity-button" data-hashtag-id="{{ value.id }}" uk-icon="icon: close;ratio:1.4"></a>
+            {% endif %}
+
+          </i>
+        </h6>
+
+      </div>
+  </div>
+
+
+</div>
+      <div class="grid-item" style="width: 22%; float: left;">
+        <div class="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light relative" style="background-image: url('{{ value.place.pic.url }}');" data-src="{{ value.place.pic.url }}" uk-img>
+          <!-- Saydam siyah blok -->
+
+        </div>
+    </div>
+
+        <div class="grid-item" style="width: 30%; float: left; ">
+        <div class="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light relative" style="background-image: url('{{ value.hashtag.pic.url }}');" data-src="{{ value.hashtag.pic.url }}" uk-img>
+          <!-- Saydam siyah blok -->
+
+        </div>
+    </div>
+    
+    <div class="grid-item" style="width: 48%; float: left;">
+        <div class="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light relative" style="background-image: url('{{ value.community.pic.url }}');" data-src="{{ value.community.pic.url }}" uk-img>
+          <!-- Saydam siyah blok -->
+
+
+        </div>
+        </div>
+     
+    
+   
+      
+      {% if forloop.counter|divisibleby:3 %} {# Her üç öğe sonra yeni bir satır ekleyin #}
+        <div style="clear: both;"></div>
+      {% endif %}
+
+    </div>
+  </div>
+    {% endfor %}
+  
+  {% endif %}
+</div>
+{% endblock body1 %}
+
+
+{% block tags %}
+<span uk-icon="icon: bolt;ratio:1.3" style="color:#075f92 ;"></span>
+<span uk-icon="icon: search;ratio:1.2" style="color:#075f92 ;margin-left: 10px;"></span>
+{% endblock tags %}
+
+
+
+
+
+
+
+
+{% block scriptox %}
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const searchInput = document.getElementById("custom-search-input");
+    const gridItems = document.querySelectorAll(".filtering");
+  
+    searchInput.addEventListener("input", function() {
+      const searchTerm = searchInput.value.toLowerCase();
+  
+      gridItems.forEach(function(gridItem) {
+        const itemValue = gridItem.querySelector(".overlay h4").textContent.toLowerCase();
+        const itemCommunity = gridItem.querySelector(".overlay h6:nth-of-type(1)").textContent.toLowerCase();
+        const itemHashtag = gridItem.querySelector(".overlay h6:nth-of-type(2)").textContent.toLowerCase();
+        const itemPlace = gridItem.querySelector(".overlay h6:nth-of-type(3)").textContent.toLowerCase();
+        const itemActivityLink = gridItem.querySelector(".overlay a[rel='noopener noreferrer']").textContent.toLowerCase();
+        const itemMTime = gridItem.querySelector(".overlay h6:nth-of-type(4)").textContent.toLowerCase();
+  
+        // Şartlarınıza göre filtrelemeyi yapın
+        const showItem =
+          itemValue.includes(searchTerm) ||
+          itemCommunity.includes(searchTerm) ||
+          itemHashtag.includes(searchTerm) ||
+          itemPlace.includes(searchTerm) ||
+          itemActivityLink.includes(searchTerm) ||
+          itemMTime.includes(searchTerm);
+  
+        gridItem.style.display = showItem ? "block" : "none";
+      });
+    });
+  });
+  </script>
+  
+  
+
+  <script>
+    function toggleActivity(activityId) {
+      const hashtagButton = document.querySelector(`.activity-button[data-hashtag-id="${activityId}"]`);
+      $.ajax({
+          type: 'GET',
+          url: `/account/activity/toggle-like/${activityId}/`,
+          success: function(data) {
+              if (data.success) {
+                  if (data.is_added) {
+                      hashtagButton.setAttribute("uk-icon", "icon:close;ratio:1.4;color:#075f92 ;");
+                  } else {
+                      hashtagButton.setAttribute("uk-icon", "icon:bookmark;ratio:1.4;color:#075f92 ;");
+                  }
+              } else {
+                  alert(data.message);
+              }
+          },
+          error: function(error) {
+              console.log(error);
+          }
+      });
+    }
+    
+    </script>
+
+
+
+{% endblock scriptox %}
+
+
+
+
+{% block aboc %}
+
+<form class="uk-search uk-search-navbar" style="margin-top: 5px;">
+    <span uk-search-icon></span>
+    <input class="uk-search-input" type="search" placeholder="Ara" aria-label="Search" id="custom-search-input">
+  </form>
+
+  {% endblock aboc %}

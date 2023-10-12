@@ -1,0 +1,36 @@
+{% extends "layout.html" %} {% load static %}{% block scripts %} {% endblock scripts %} 
+
+
+
+{% block body1 %}
+
+{% for value in list1 %}
+<div class="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light" style="max-height: 250px; margin-top: 0px;" data-src="{{value.pic.url}}" uk-img>
+    <h4 style="margin-top: 0px;color: rgb(255, 255, 255);"># {{value}}</h4>
+  </div>
+
+{% endfor %}
+
+<div class="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light" style="max-height: 250px; margin-top: 0px;" data-src="/static/images/profilefun.png" uk-img>
+  <h4 style="margin-top: 0px;"> Filtrele, Ekle, Beğen, Git! </h4>
+</div>
+
+{% for value in list2 %}
+<div class="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light" style="max-height: 250px; margin-top: 0px;" data-src="{{value.pic.url}}" uk-img>
+    <h4 style="margin-top: 0px;color: rgb(255, 255, 255);"># {{value}}</h4>
+  </div>
+
+{% endfor %},
+
+<div class="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light" style="max-height: 250px; margin-top: 0px;" data-src="/static/images/settings.png" uk-img>
+  <h4 style="margin-top: 0px;"> Seç, Bul, Bildirim Gelsin! </h4>
+</div>
+
+
+{% for value in list3 %}
+<div class="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light" style="max-height: 250px; margin-top: 0px;" data-src="{{value.pic.url}}" uk-img>
+    <h4 style="margin-top: 0px;color: rgb(255, 255, 255);"># {{value}}</h4>
+  </div>
+
+{% endfor %}
+{% endblock body1 %}

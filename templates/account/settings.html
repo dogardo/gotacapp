@@ -1,0 +1,609 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block styles %}
+<style>
+  /* Saydam siyah blok stil */
+  .grid-item {
+      position: relative;
+      max-height: 300px;
+      overflow: hidden;
+  }
+
+  .grid-item-1 {
+      position: relative;
+      max-height: 90px;
+      overflow: hidden;
+  }
+
+  .overlay {
+      position: absolute;
+      
+      right: 0;
+      height: 85%;
+      width: 75%;
+      margin-top: 5.5%;
+      background-color: rgba(255, 255, 255, 0.5); /* Siyah arka plan */
+      display: flex;
+      flex-direction: column; /* İç içe simgeleri alt alta yerleştirmek için */
+      align-items: right;
+      justify-content: right;
+      z-index: 999;
+  }
+
+  .overlayy {
+      position: absolute;
+      
+      left: 0;
+      height: 85%;
+      width: 75%;
+      margin-top: 5.5%;
+      background-color: rgba(0, 0, 0, 0.5); /* Siyah arka plan */
+      display: flex;
+      flex-direction: column; /* İç içe simgeleri alt alta yerleştirmek için */
+      align-items: left;
+      justify-content: left;
+      z-index: 999;
+  }
+
+  .overlayy h4 {
+      text-align: left;
+      color: #D9D4D4; /* Beyaz yazı rengi */
+      font-family: "Arial", sans-serif;
+      font-weight: normal;
+  }
+
+  .overlayy h6 {
+      text-align: left;
+      color: #D9D4D4; /* Beyaz yazı rengi */
+      font-family: "Arial", sans-serif;
+      font-weight: normal;
+  }
+
+  .overlay2 {
+      position: absolute;
+      
+      left: 0;
+      height: 85%;
+      width: 45.5%;
+      margin-top: 5.2%;
+      background-color: rgba(0, 0, 0, 0.6); /* Siyah arka plan */
+      display: flex;
+      flex-direction: column; /* İç içe simgeleri alt alta yerleştirmek için */
+      align-items: right;
+      justify-content: right;
+      z-index: 999;
+  }
+
+  .overlay2 h4 {
+      text-align: left;
+      color: #D9D4D4; /* Beyaz yazı rengi */
+      font-family: "Arial", sans-serif;
+      font-weight: normal;
+  }
+
+  .overlay2 h6 {
+      text-align: left;
+      color: #D9D4D4; /* Beyaz yazı rengi */
+      font-family: "Arial", sans-serif;
+      font-weight: normal;
+  }
+
+  /* Görsel üzerine karartma eklemek için ::before pseudo-elementi */
+  .uk-background-cover::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 20px;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.2); /* Görseli biraz karartmak için arka plan rengi */
+  }
+
+  /* Yazı */
+  .overlay h4 {
+      text-align: left;
+      color: #075f92; /* Beyaz yazı rengi */
+      font-family: "Arial", sans-serif;
+      font-weight: normal;
+  }
+
+  .overlay h6 {
+      text-align: left;
+      color: #075f92; /* Beyaz yazı rengi */
+      font-family: "Arial", sans-serif;
+      font-weight: normal;
+  }
+
+  /* Simgeler */
+  .overlay img {
+      max-width: 100px;
+      margin: 5px 0;
+  }
+
+
+  .my-custom-icon {
+  font-size: 55px;
+}
+
+
+#urunlerDiv1 {
+  /* Burada istediğiniz CSS özelliklerini tanımlayabilirsiniz */
+  background-color: #081821; /* Arka plan rengi */
+  height: 60px; /* İçerik içi boşluk */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Gölge efekti */
+  cursor: pointer; /* İşaretçi türü */
+  /* İstediğiniz diğer CSS özelliklerini ekleyebilirsiniz */
+}
+
+#urunlerDiv1 h5 {
+  
+    line-height: 60px;
+        text-align: left;
+      color: #D9D4D4; /* Beyaz yazı rengi */
+      font-family: "Arial", sans-serif;
+      font-weight: normal;
+  /* İstediğiniz diğer CSS özelliklerini ekleyebilirsiniz */
+}
+
+#urunlerDiv2 {
+  /* Burada istediğiniz CSS özelliklerini tanımlayabilirsiniz */
+  background-color: #000000; /* Arka plan rengi */
+  height: 60px; /* İçerik içi boşluk */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Gölge efekti */
+  cursor: pointer; /* İşaretçi türü */
+  /* İstediğiniz diğer CSS özelliklerini ekleyebilirsiniz */
+}
+
+#urunlerDiv2 h5 {
+  
+    line-height: 60px;
+        text-align: left;
+        color: #D9D4D4;  /* Beyaz yazı rengi */
+      font-family: "Arial", sans-serif;
+      font-weight: normal;
+  /* İstediğiniz diğer CSS özelliklerini ekleyebilirsiniz */
+}
+
+#urunlerDiv3 {
+  /* Burada istediğiniz CSS özelliklerini tanımlayabilirsiniz */
+  background-color: #081821; /* Arka plan rengi */
+  height: 60px; /* İçerik içi boşluk */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Gölge efekti */
+  cursor: pointer; /* İşaretçi türü */
+  /* İstediğiniz diğer CSS özelliklerini ekleyebilirsiniz */
+}
+
+#urunlerDiv3 h5 {
+  
+    line-height: 60px;
+        text-align: left;
+      color: #D9D4D4; /* Beyaz yazı rengi */
+      font-family: "Arial", sans-serif;
+      font-weight: normal;
+  /* İstediğiniz diğer CSS özelliklerini ekleyebilirsiniz */
+}
+
+#urunlerDiv4 {
+  /* Burada istediğiniz CSS özelliklerini tanımlayabilirsiniz */
+  background-color: #000000; /* Arka plan rengi */
+  height: 60px; /* İçerik içi boşluk */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Gölge efekti */
+  cursor: pointer; /* İşaretçi türü */
+  /* İstediğiniz diğer CSS özelliklerini ekleyebilirsiniz */
+}
+
+#urunlerDiv4 h5 {
+  
+    line-height: 60px;
+        text-align: left;
+        color: #D9D4D4; /* Beyaz yazı rengi */
+      font-family: "Arial", sans-serif;
+      font-weight: normal;
+  /* İstediğiniz diğer CSS özelliklerini ekleyebilirsiniz */
+}
+
+
+#urunlerDiv5 {
+  /* Burada istediğiniz CSS özelliklerini tanımlayabilirsiniz */
+  background-color:  #000000; /* Arka plan rengi */
+  height: 60px; /* İçerik içi boşluk */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Gölge efekti */
+  cursor: pointer; /* İşaretçi türü */
+  /* İstediğiniz diğer CSS özelliklerini ekleyebilirsiniz */
+}
+
+#urunlerDiv5 h5 {
+  
+    line-height: 60px;
+        text-align: left;
+        color: #D9D4D4; /* Beyaz yazı rengi */
+      font-family: "Arial", sans-serif;
+      font-weight: normal;
+  /* İstediğiniz diğer CSS özelliklerini ekleyebilirsiniz */
+}
+
+
+
+</style>
+
+
+
+<style>
+    /* Saydam siyah blok stil */
+    .grid-itemx {
+        position: relative;
+        max-height: 150px;
+        overflow: hidden;
+    }
+  
+    .overlayx {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.4); /* Siyah arka plan */
+        display: flex;
+        flex-direction: column; /* İç içe simgeleri alt alta yerleştirmek için */
+        align-items: center;
+        justify-content: center;
+    }
+  
+    /* Görsel üzerine karartma eklemek için ::before pseudo-elementi */
+    .uk-background-cover::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 20px;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.2); /* Görseli biraz karartmak için arka plan rengi */
+    }
+  
+    /* Yazı */
+    .overlayx h5 {
+        margin: 0;
+        color: #fff; /* Beyaz yazı rengi */
+        font-family: "Arial", sans-serif;
+        font-weight: normal;
+    }
+  
+    /* Simgeler */
+    .overlayx img {
+        max-width: 100px;
+        margin: 5px 0;
+    }
+
+
+    .uk-container h5 {
+        margin: 0;
+        color: #fff; /* Beyaz yazı rengi */
+        font-family: "Arial", sans-serif;
+        font-weight: normal;
+    }
+
+    .uk-container h3 {
+        margin: 0;
+        color: #fff; /* Beyaz yazı rengi */
+        font-family: "Arial", sans-serif;
+        font-weight: normal;
+    }
+    
+
+    .overlayabv {
+      position: absolute;
+      
+      left: 0;
+      height: 85%;
+      width: 60%;
+      margin-top: 5.2%;
+      background-color: rgba(0, 0, 0, 0.6); /* Siyah arka plan */
+      display: flex;
+      flex-direction: column; /* İç içe simgeleri alt alta yerleştirmek için */
+      align-items: right;
+      justify-content: right;
+      z-index: 999;
+  }
+
+  .overlayabv h4 {
+      text-align: left;
+      color: #D9D4D4; /* Beyaz yazı rengi */
+      font-family: "Arial", sans-serif;
+      font-weight: normal;
+  }
+
+  .overlayabv h5 {
+      text-align: left;
+      color: #D9D4D4; /* Beyaz yazı rengi */
+      font-family: "Arial", sans-serif;
+      font-weight: normal;
+  }
+
+
+  .overlayabv h6 {
+      text-align: left;
+      color: #D9D4D4; /* Beyaz yazı rengi */
+      font-family: "Arial", sans-serif;
+      font-weight: normal;
+  }
+
+
+  </style>
+
+
+
+{% endblock styles %}
+
+{% block body1 %}
+
+
+
+
+  <div class="grid-item">
+                <div class="overlayabv" >
+
+                    <div style="display: grid; gap: 20px; margin-top: 10px;margin-left: 10px;">
+                    <div>
+                    <!-- Sol Kısım (%70) -->
+                    <h4 style="margin-top: 10px;">Profil Ayarları</h4>
+                    <h5 style="margin-top: 20px;">{{user.name}} </h5>
+                    <h6 style="margin-top:-0px;margin-bottom:-5px"><i><a style="margin-right: 8px; ;"  href="/activities/hashtag" style="margin-left: 8px; ;" uk-icon="link"></a></i>{{user.username}} </h6>
+                    <h6 style="margin-top:20px;margin-bottom:-5px"><i><a style="margin-right: 8px; ;"  href="/activities/hashtag" style="margin-left: 8px; ;" uk-icon="info"></a></i>{{user.gender}} </h6>
+                    <h6 style="margin-top:20px;margin-bottom:-5px"><i><a style="margin-right: 8px; ;"  href="/activities/hashtag" style="margin-left: 8px; ;" uk-icon="receiver"></a></i>{{user.phone}} </h6>
+                    <h6 style="margin-top:20px;margin-bottom:-5px"><i><a style="margin-right: 8px; ;"  href="/activities/hashtag" style="margin-left: 8px; ;" uk-icon="mail"></a></i>{{user.email}} </h6>
+                </div>
+                    </div>
+
+                    </div>
+
+                    <div class="grid-item" style="width: 40%; float: left;">
+                    <div class="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light relative" style="background-image: url('/static/images/profilefun.png');" data-src="{{ value.place.pic.url }}" uk-img>
+                    <!-- Saydam siyah blok -->
+
+                    </div>
+                    </div>
+
+
+                    <div class="grid-item" style="width: 60%; float: left;">
+                    <div class="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light relative"
+
+
+
+
+
+
+
+                    {% if user.pic1 %}
+
+
+                    style="background-image: url('{{user.pic1.url}}');" data-src="{{ user.pic1.url }}" 
+
+                    {% else %}
+
+                    {% if user.gender|safe == "Erkek" %}
+
+                    style="background-image: url('/static/images/profileboy.png');" data-src="'/static/images/profilefun.png'" 
+
+                    {% else %}
+
+                    style="background-image: url('/static/images/profilegirl.png');" data-src="'/static/images/profilefun.png'" 
+
+                    {% endif %}
+
+                    {% endif %}
+
+
+
+
+
+                    uk-img>
+                    <!-- Saydam siyah blok -->
+
+
+                    </div>
+                
+                </div>
+            </div>
+<div class="grid-item" style="width: 40%; float: left;">
+
+        <div class="grid-item uk-container" style="height: 50px; background-color: #081821;" >
+        <div style="margin-top: 12px; text-align: right;;">
+        <h5><span uk-icon="icon: refresh;ratio:1" style="color:#075f92 ;margin-right: 2px;"> </span><span uk-icon="icon: image;ratio:1.2" style="color:#075f92 ;margin-left: 8px;"></span> </h5> </div>
+
+        </div>
+
+
+        <div class="grid-item uk-container" style="height: 50px; background-color: #000000;" >
+            <div style="margin-top: 12px; text-align: right;;">
+            <h5><span uk-icon="icon: refresh;ratio:1" style="color:#075f92 ;margin-right: -2px;"> </span><span uk-icon="icon: lock;ratio:1.4" style="color:#075f92 ;margin-left: 10px;"></span></h5></div>
+    
+            </div>
+
+
+        <div class="grid-item uk-container" style="height: 50px; background-color:#081821;" >
+        <div style="margin-top: 12px; text-align: right;;">
+        <h5><span uk-icon="icon: refresh;ratio:1" style="color:#075f92 ;margin-right: -1px;"> </span><span uk-icon="icon: receiver;ratio:1.2" style="color:#075f92 ;margin-left: 12px;"></span></h5></div>
+
+        </div>
+
+
+        <div class="grid-item uk-container" style="height: 50px; background-color:#000000;" >
+            <div style="margin-top: 12px; text-align: right;;">
+            <h5><span uk-icon="icon: refresh;ratio:1" style="color:#075f92 ;margin-right: -1px;"> </span><span uk-icon="icon: mail;ratio:1.2" style="color:#075f92 ;margin-left: 12px;"></span></h5></div>
+    
+            </div>
+            
+
+
+
+</div>
+     
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %} 
+                <div class="grid-item" style="width: 60%; float: right;">
+
+
+
+                <div class="grid-item uk-container" style="height: 50px; background-color:#081821;; " >
+                <div class="uk-margin">
+
+                <div style="margin-top:10px;" class="js-upload" name="pic1" id="id_pic1" uk-form-custom>
+                <input type="file" multiple id="{{form.pic1}}
+                <button class="uk-button uk-button-default" style="margin-top: 10;height: 30px;min-width: 100%;text-align: left;color: #075f92;font-family: 'Arial', sans-serif;font-weight: normal;"type="button" tabindex="-1">
+                  Fotoğrafını Değiştir..
+                </button>
+
+                </div>
+
+
+                </div>
+
+                </div>
+
+
+
+
+
+                <div class="grid-item uk-container" style="height: 50px; background-color:#000000" >
+                <div class="uk-margin"><input class="uk-input" style="max-height: 30px;margin-top: 10px;" type="password" placeholder="Şifre" autocomplete="off" id="{{form.password}}</div>
+
+                </div>
+
+
+                <div class="grid-item uk-container" style="height: 50px; background-color:#081821;; " >
+                <div class="uk-margin"><input class="uk-input" style="max-height: 30px;margin-top: 10px;" type="number" placeholder="Telefon" autocomplete="off" id="{{form.phone}}</div>
+
+                </div>
+
+
+                <div class="grid-item uk-container" style="height: 50px; background-color:#000000;; " >
+                <div class="uk-margin"><input class="uk-input" style="max-height: 30px;margin-top: 10px;" type="text" placeholder="email" autocomplete="off" id="{{form.email}}</div>
+
+                </div>
+
+
+
+
+
+                </div>
+
+                <div class="grid-item" style="width: 100%; float: left;">
+
+                    <button class="uk-button uk-button-default" style="margin: 4%;width: 92%;text-align: center;
+                    text-align: left;
+                color: #075f92; /* Beyaz yazı rengi */
+                font-family: 'Arial', sans-serif;
+                font-weight: normal;
+                " type="submit">Güncelle</button>
+                </div>
+ 
+</form>
+
+<div class="grid-item-1" style="width: 100%; float: left;">
+
+
+    <div class="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light relative" style="background-image: url('/static/images/settings.png');" data-src="{{ value.place.pic.url }}" uk-img>
+        <!-- Saydam siyah blok -->
+  
+      </div>
+    
+    </div>
+
+
+<div class="grid-item" style="width: 40%; float: left;">
+
+
+
+
+
+
+            <div class="grid-item uk-container" style="height: 50px; background-color:#081821;" >
+                <div style="margin-top: 12px; text-align: right;;">
+                <h5 style="margin-right: 1px;"><span uk-icon="icon: trash;ratio:1" style="color:#075f92 ;margin-left: 8px;"> </span><span uk-icon="icon: user;ratio:1.2" style="color:#075f92 ;margin-left: 12px;"></span></h5></div>
+            
+                </div>
+            
+                <div class="grid-item uk-container" style="height: 50px; background-color: #000000;" >
+                <div style="margin-top: 12px; text-align: right;margin-right:-5px;">
+                <h5 style="margin-right: 6px;"><span uk-icon="icon: sign-out;ratio:1" style="color:#075f92 ;margin-right: 0px;"> </span><span uk-icon="icon: user;ratio:1.2" style="color:#075f92 ;margin-left: 12px;"></span></h5></div>
+            
+                </div>
+
+
+</div>
+ 
+
+
+
+
+    <div class="grid-item" style="width: 60%; float: right;">
+        <a href="">
+            <div class="grid-item uk-container" style="height: 50px; background-color:#081821;" >
+        <div style="margin-top: 10px;">
+        
+        
+                <button class="uk-button uk-button-default" href="#" style="margin-top: 0;height: 30px;min-width: 100%;
+                text-align: left;
+                color: #075f92; /* Beyaz yazı rengi */
+                font-family: 'Arial', sans-serif;
+                font-weight: normal;
+                " >Hesabı Sil</button>
+            </div>
+            </div>
+        </a>
+            <a href="">
+            <div class="grid-item uk-container" style="height: 50px; background-color:#000000;" >
+                <div style="margin-top: 10px;">
+                
+                
+                            <button class="uk-button uk-button-default" href="#" style="margin-top: 0;height: 30px;min-width: 100%;
+                            text-align: left;
+                color: #075f92; /* Beyaz yazı rengi */
+                font-family: 'Arial', sans-serif;
+                font-weight: normal;
+                " >Çıkış Yap</button>
+                        </div>
+                        </div>
+                    </a>
+        
+
+
+</div>
+ 
+
+
+{% endblock body1 %}
+
+
+{% block scriptox %}
+
+
+{% endblock scriptox %}
+
+
+{% block colorforyou %}  style="background-color: #081821"> {% endblock colorforyou %}
+
+{% block tags %}
+<span uk-icon="icon: settings;ratio:1.2" style="color:#075f92 ;"></span>
+{% endblock tags %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

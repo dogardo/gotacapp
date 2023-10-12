@@ -1,0 +1,114 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+{% extends "layout.html" %} {% load crispy_forms_tags %} {% block body1 %}
+
+
+
+<div>
+
+<div style="margin-top:100px;margin-right: 20px;margin-left: 20px;margin-bottom: 20px; " > 
+
+
+<div class="form-login" >
+
+
+
+    <div class="form-login__social" >
+
+
+
+        <ul class="social">
+            <li><a href="http://www.google.com"><img src="/static/assets/img/twitter.svg" alt="google"></a></li>
+            <li><a href="http://www.facebook.com"><img src="/static/assets/img/facebook.svg" alt="facebook"></a></li>
+            <li><a href="http://www.twitter.com"><img src="/static/assets/img/twitter.svg" alt="twitter"></a></li>
+        </ul>
+    </div>
+    <div class="form-login__box" >
+
+
+        <form method="post" enctype="multipart/form-data" style="margin-bottom: -10px;">
+          {% csrf_token %} 
+
+
+
+                    <div  class="uk-heading-line uk-text-center" style="margin-bottom:-45px;margin-top: 10px;" ><small>Kullanıcı Adın</small></div>
+                    <div class="uk-margin"><input class="uk-input" type="text" style="max-height: 40px;" placeholder="Kullanıcı Adı" id="{{form.username}}</div>
+
+                    <div  class="uk-heading-line uk-text-center" style="margin-bottom:-45px" ><small>Şifren</small></div>
+                    <div class="uk-margin"><input class="uk-input" type="password" style="max-height: 40px;max-height: 40px;" placeholder="Şifre" id="{{form.password}}</div>
+
+
+                    <div  class="uk-heading-line uk-text-center" style="margin-bottom:-45px" ><small>Şifre Doğrulaman</small></div>
+
+                    <div class="uk-margin"><input class="uk-input" style="max-height: 40px;" type="password" placeholder="Şifre Doğrulama" id="{{form.confirm}}</div>
+
+                    <div  class="uk-heading-line uk-text-center" style="margin-top: 20px;margin-bottom:-45px" ><small>İsmin</small></div>
+
+                    <div class="uk-margin"><input class="uk-input" style="max-height: 40px;" type="text" placeholder="İsmin" id="{{form.name}}</div>
+
+                    <div  class="uk-heading-line uk-text-center" style="margin-top: 10px;margin-bottom:-45px" ><small>Mail Adresin</small></div>
+                    <div class="uk-margin"><input class="uk-input" style="max-height: 40px;" type="email" placeholder="Mail Adresin" id="{{form.email}}</div>
+
+                    <div  class="uk-heading-line uk-text-center" style="margin-bottom:-45px" ><small>Telefon Numaran</small></div>
+                    
+                    <div class="uk-margin"><input class="uk-input"  style="max-height: 40px;" type="number" placeholder="Telefon Numaran" id="{{form.phone}}</div>
+
+
+                    <div  class="uk-heading-line uk-text-center" style="margin-bottom:-25px" ><small>Cinsiyetin</small></div>
+                    <select class="js-select uk-flex-1 uk-input" style="max-height: 40px;" type="text" placeholder="Cinsiyetin" name="gender" id="id_gender">
+                      <option value="{{form.gender}}</option>
+                    </select>
+
+
+          <div  class="uk-heading-line uk-text-center" style="margin-top: 35px;margin-bottom:-65px" ></div>
+
+            <div type="submit" class="uk-margin btn"><button style="max-height: 40px;" class="uk-button uk-button-danger uk-width-1-1" type="submit" >Üye Ol</button></div>
+
+        </form>
+
+
+          
+    </div>
+</div>
+</div>
+</div>
+{% endblock body1 %}
+
+
+
+
+
+{% block colorforyou %}  style="background-image: url(/static/images/logs.png);image-size"> {% endblock colorforyou %}
+
+
+
+

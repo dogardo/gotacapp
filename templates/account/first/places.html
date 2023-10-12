@@ -1,0 +1,196 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block styles %}
+<style>
+  /* Saydam siyah blok stil */
+  .grid-item {
+      position: relative;
+      max-height: 250px;
+      overflow: hidden;
+  }
+
+  .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 45%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.4); /* Siyah arka plan */
+      display: flex;
+      flex-direction: column; /* İç içe simgeleri alt alta yerleştirmek için */
+      align-items: center;
+      justify-content: center;
+  }
+
+  /* Görsel üzerine karartma eklemek için ::before pseudo-elementi */
+  .uk-background-cover::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.2); /* Görseli biraz karartmak için arka plan rengi */
+  }
+
+  /* Yazı */
+  .overlay h4 {
+      margin: 0;
+      color: #fff; /* Beyaz yazı rengi */
+      font-family: "Arial", sans-serif;
+      font-weight: normal;
+  }
+
+  /* Simgeler */
+  .overlay img {
+      max-width: 100px;
+      margin: 5px 0;
+  }
+
+
+  .icon-container {
+  position: relative;
+  display: inline-block;
+}
+
+.icon-link {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  color: #000; /* Ikon rengi */
+}
+
+
+</style>
+
+
+
+{% block w4for %}
+
+;height:100px;
+
+{% endblock w4for %}
+
+
+{% endblock styles %}
+
+
+{% block forwelcome %}
+  <div style="margin-top: 30px;margin-bottom: -75px;margin-left: -35px;">
+
+  
+    <a href="/account/w/4/" style="color:#075f92 ;;font-family: 'Arial', sans-serif;font-weight: normal;">( Adım 3 - <span uk-icon="icon: location;ratio:1" ></span> Konum Seçimi )  : Gidebileceğiniz Konumları Kaydediniz ve Buraya Tıklayınız </a>
+        </div>
+
+
+
+{% endblock forwelcome %}
+
+{% block forwelcome2 %}
+{% endblock forwelcome2 %}
+
+
+
+{% block body1 %}
+
+<div style="margin-top: 80px;"></div>
+
+
+
+<div class="grid-container">
+  {% if places.all.count != 0 %}
+    {% for value in places %}
+      <div class="grid-item">
+        <div class="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light relative" style="background-image: url('{{ value.pic.url }}');" data-src="{{ value.pic.url }}" uk-img>
+          <!-- Saydam siyah blok -->
+          <div class="overlay">
+            <h4># {{ value }}</h4>
+            <div style="margin-top: 30px;"></div>
+
+            {% if value not in request.user.wantToKnowPlac.all %}
+            <div>
+              <a href="javascript:void(0);" onclick="togglePlactag({{ value.id }});" class="place-button" data-place-id="{{ value.id }}" uk-icon="icon:bookmark;ratio:1.6"></a>
+            </div>
+            {% else %}
+            <div class="icon-container">
+              <a href="javascript:void(0);" onclick="togglePlactag({{ value.id }});" class="place-button" data-place-id="{{ value.id }}" uk-icon="icon:close;ratio:1.6"></a>
+          
+            </div>
+            {% endif %}
+            
+            <!-- İkonları istediğiniz kadar ekleyebilirsiniz -->
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  {% endif %}
+</div>
+{% endblock body1 %}
+
+{% block tags %}
+<span uk-icon="icon: location;ratio:1.3" style="color:#075f92 ;"></span>
+<span uk-icon="icon: search;ratio:1.2" style="color:#075f92 ;margin-left: 10px;"></span>
+{% endblock tags %}
+
+
+{% block scriptox %}
+<script>
+function togglePlactag(placeId) {
+  const placeButton = document.querySelector(`.place-button[data-place-id="${placeId}"]`);
+  $.ajax({
+      type: 'GET',
+      url: `/account/place/toggle-like/${placeId}/`,
+      success: function(data) {
+          if (data.success) {
+              if (data.is_added) {
+                  placeButton.setAttribute("uk-icon", "icon:close;ratio:1.6");
+              } else {
+                  placeButton.setAttribute("uk-icon", "icon:bookmark;ratio:1.6");
+              }
+          } else {
+              alert(data.message);
+          }
+      },
+      error: function(error) {
+          console.log(error);
+      }
+  });
+}
+
+</script>
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function() {
+  const placeSearchInput = document.getElementById("place-search");
+  const gridItems = document.querySelectorAll(".grid-item");
+
+  placeSearchInput.addEventListener("input", function() {
+    const searchTerm = placeSearchInput.value.toLowerCase();
+
+    gridItems.forEach(function(gridItem) {
+      const placeName = gridItem.querySelector(".overlay h4").textContent.toLowerCase();
+
+      if (placeName.includes(searchTerm)) {
+        gridItem.style.display = "block";
+      } else {
+        gridItem.style.display = "none";
+      }
+    });
+  });
+});
+
+</script>
+
+
+{% endblock scriptox %}
+
+{% block aboc %}
+
+<form class="uk-search uk-search-navbar" style="margin-top: 5px;">
+    <span uk-search-icon></span>
+    <input class="uk-search-input" type="search" placeholder="Ara" aria-label="Search" id="place-search">
+  </form>
+
+  {% endblock aboc %}

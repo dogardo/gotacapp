@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+  <meta content="Templines" name="author">
+  <meta content="TeamHost" name="description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="HandheldFriendly" content="true">
+  <meta name="format-detection" content="telephone=no">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+
+  {% block metas %}
+  {% endblock metas %}
+
+    <title>GOTAC</title>
+
+
+  {% load static %}
+
+  <link href="{% static 'assets/img/favicon.png' %}" rel="shortcut icon" type="image/x-icon">
+  <link href="{% static 'assets/css/libs.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/css/main.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/css/showcase.css' %}" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* Açıldığında menü arka plan rengi */
+    .uk-navbar-dropbar {
+    background-color:#282829 /* Kırmızı arka plan rengi */
+    }
+
+    /* Açılır menünün içindeki öğelerin metin rengini değiştir */
+    .uk-navbar-dropbar-slide {
+        color: #282829 /* Yeşil metin rengi */
+    }
+
+    
+</style>
+
+<style>
+    /* Metinlerin rengi ve yazı tipi */
+    .uk-nav-dropdown-nav li a {
+        color: #D9D4D4; /* İstenilen renk (Gri) */
+        font-family: Arial, sans-serif; /* Arial yazı tipi */
+    }
+  
+    /* İç içe liste öğeleri (alt seviyedeki liste) */
+    .uk-nav-dropdown-nav li ul li a {
+        color: #D9D4D4; /* İstenilen renk (Gri) */
+        font-family: Arial, sans-serif; /* Arial yazı tipi */
+    }
+
+    .uk-nav-dropdown-nav-header li ul li a {
+        color: #D9D4D4; /* İstenilen renk (Gri) */
+        font-family: Arial, sans-serif; /* Arial yazı tipi */
+    }
+
+
+
+
+    .uk-navbar-container {
+    position: fixed; /* Navbar container'ı sabitle */
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1001; /* Navbar'dan daha üstte göster */
+    background-color: #081821; /* Navbar arka plan rengi */
+    /* İhtiyaca göre diğer stil özelliklerini ekleyin */
+}
+
+.uk-navbar-dropdown {
+    position: fixed; /* Dropdown nav'ı sabitle */
+    top: 80px; /* Navbar yüksekliğini göz önünde bulundurun, gerektiğinde ayarlayın */
+
+    background-color: rgb(0,0,0,0);
+
+    /* İhtiyaca göre diğer stil özelliklerini ekleyin */
+}
+
+
+.uk-navbar-dropdown-nav {
+    position:fixed; /* Dropdown nav'ı sabitle */
+    left: 0;
+    right: 0;
+    top: 80px; /* Navbar yüksekliğini göz önünde bulundurun, gerektiğinde ayarlayın */
+
+    /* İhtiyaca göre diğer stil özelliklerini ekleyin */
+}
+
+.xxx {
+    margin-left: 85px;
+    margin-right: 85px; /* Mesafeyi ayarlayın */
+}
+  </style>
+
+
+
+
+{% block styles %}
+
+
+{% endblock styles %}
+</head>
+
+
+      
+
+
+<body class="page-home" >
+
+
+
+  <div class="page-wrapper" 
+  
+  {% block colorforyou %}  style="background-color: #333333"> {% endblock colorforyou %}
+
+
+    <div class="uk-position-relative">
+
+        <div class="uk-position-relative" >
+
+            <nav class="uk-navbar-container" style="background-color: #081821;width: 100%;" >
+                <div class="uk-container" 
+                
+                {% block w4for %}
+
+
+                {% endblock w4for %}
+                ">
+                    
+                    <div uk-navbar="dropbar: true; dropbar-anchor: !.uk-navbar-container; target-y: !.uk-navbar-container" style="background-color: #081821;height: 100%;">
+                       
+                        <div class="uk-navbar-left" >
+        
+                            <ul class="uk-navbar-nav " >
+                                <li class="uk-active"><a href="#"></a></li>
+                                <li class="uk-active"><a href="#"></a></li>
+
+                                <li>
+                                    {% block forwelcome %}
+                                    <a class="uk-navbar-item uk-logo" href="#" style="display: flex; justify-content: center; align-items: center;" >
+                                        <img style="height: 30px;margin-left: 10px;" src="{% static 'images/logo2.png' %}" alt="Logo">
+                                    </a>
+                                    
+                                    <div class="uk-navbar-dropdown"  >
+                                    
+                                        <ul class="uk-nav uk-navbar-dropdown-nav" style="margin-right: -20px;background-color: #282829;">
+
+                                            <li class="xxx"><a href="#"></a></li>
+                                            <li class="xxx"><a href="#"></a></li>
+                                            <li class="xxx"><a href="#"></a></li>
+                                            <li class="xxx"><a href="#"></a></li>
+                                            <a href="/activities/" style="font-family: Arial, sans-serif; color: #D9D4D4;">
+
+                                                <li class="xxx">
+
+                                                    {% if request.user.is_authenticated %}
+                                                    Keşif 
+                                                    {% else %}
+                                                        Siz İlgi Alanlarınızı Seçin
+                                                    {% endif %}
+
+                                                </li>
+                                                <li class="xxx"><a href="#"></a></li>
+                                              </a><li class="uk-nav-divider" style="margin-left:85px;margin-right:105px"></li>
+
+                            
+                                            <li class="xxx"><a href="/activities/hashtag" style="font-family: Arial, sans-serif; color: #D9D4D4;"> <i><a href="/activities/hashtag" style="margin-right: 8px;" uk-icon="hashtag"></a></i>Hashtag</a></li>
+                                            <li class="xxx"><a href="#"></a></li>
+                                            <li class="xxx"><a href="/activities/place" style="font-family: Arial, sans-serif; color: #D9D4D4;">  <i><a href="/activities/place"  style="margin-right: 8px;" uk-icon="location"></a></i>Lokasyon</a></li>
+                                            <li class="xxx"><a href="#"></a></li>
+                                            <li class="xxx"><a href="/activities/community" style="font-family: Arial, sans-serif; color: #D9D4D4;"><i><a href="/activities/community"  style="margin-right: 8px;" uk-icon="paint-bucket"></a></i>Sanatçı</a></li>
+                                            <li class="xxx"><a href="#"></a></li>
+                                            {% if request.user.is_authenticated %}
+
+                                            <li class="xxx"><a href="/activities" style="font-family: Arial, sans-serif; color: #D9D4D4;"><i><a href="/activities/"  style="margin-right: 8px;" uk-icon="bolt"></a></i>Aktivite</a></li>
+                                            {% else %}
+                                            {% endif %}
+                                            <li class="xxx"><a href="#"></a></li>
+                                            <li class="xxx"><a href="#"></a></li>
+                                            <li class="xxx"><a href="#"></a></li>
+
+                                        
+                                              <a href="/account/{{request.user.id}}" style="font-family: Arial, sans-serif; color: #D9D4D4;">
+                                                <li class="xxx">
+                                                    {% if request.user.is_authenticated %}
+                                                    Profil
+                                                    {% else %}
+                                                    Biz de Ona Göre Etkinlik Önerelim
+                                                    {% endif %}
+
+                                                </li>
+                                                <li class="xxx"><a href="#"></a></li>
+                                              </a><li class="uk-nav-divider" style="margin-left:85px;margin-right:105px"></li>
+
+
+                                            
+                                              {% if request.user.is_authenticated %}
+
+                                              <li class="xxx"><a href="/account" style="font-family: Arial, sans-serif; color: #D9D4D4;">  <i><a href="/account/"  style="margin-right: 8px;" uk-icon="calendar"></a></i>Takvim'im ve Profilim </a></li>
+                                              <li class="xxx"><a href="#"></a></li>
+
+                                              <li class="xxx"><a href="/account/logout" style="font-family: Arial, sans-serif; color: #D9D4D4;">  <i><a href="/account/logout"  style="margin-right: 8px;" uk-icon="sign-out"></a></i>Çıkış Yap</a></li>
+                                              
+                                              {% else %}
+                                              
+                                              <li class="xxx"><a href="/" style="font-family: Arial, sans-serif; color: #D9D4D4;">  <i><a href="/"  style="margin-right: 8px;" uk-icon="home"></a></i>Anasayfa</a></li>
+                                              <li class="xxx"><a href="#"></a></li>
+                                              <li class="xxx"><a href="/account/login" style="font-family: Arial, sans-serif; color: #D9D4D4;">  <i><a href="/account/login"  style="margin-right: 8px" uk-icon="sign-in"></a></i>Giriş Yap</a></li>
+                                              <li class="xxx"><a href="#"></a></li>
+                                              <li class="xxx"><a href="/account/register" style="font-family: Arial, sans-serif; color: #D9D4D4;">  <i><a href="/account/register"  style="margin-right: 8px;" uk-icon="happy"></a></i>Üye Ol</a></li>
+                                              {% endif %}
+
+                                              <li class="xxx"><a href="#"></a></li>
+                                            
+                                              <li class="xxx"><a href="#"></a></li>
+                                              <li class="xxx"><a href="#"></a></li>
+                                              <li class="xxx"><a href="#"></a></li>
+                                          
+                                           
+                                        </ul>
+                                 
+                                    </div>
+                                    {% endblock forwelcome %}
+                                </li>
+   
+                            </ul>
+        
+                        </div>
+                        {% block forwelcome2 %}
+                        <div class="uk-navbar-right" style="color: #D9D4D4;font-family: Arial, sans-serif;margin-right: 30px;position: relative;">
+                           
+                            {% block tags %}
+                  
+                            {% endblock tags %}
+
+                            <div class="uk-navbar-dropdown" style="z-index: 1111">
+                                <ul class="uk-nav uk-navbar-dropdown-nav" style="margin-left: -80px;background-color: #282829;min-height: 50px;">
+                                    
+                                <li class="xxx">
+
+                                      {% block aboc %}
+
+
+
+                                      {% endblock aboc %}
+
+                                 
+
+                            </li>
+                            </ul>
+                        
+                    </div>
+
+                        </div>
+                        {% endblock forwelcome2 %}
+                    </div>
+                    
+                </div>
+            </nav>
+        
+            <div style="margin-top: 81px;">
+            {% block body1 %}
+
+
+          
+            {% endblock body1 %}
+        </div>
+
+
+        </div>
+    
+    </div>
+
+      
+  </div>
+
+
+</body>
+
+
+<script src="/static/assets/js/libs.js"></script>
+<script src="/static/assets/js/main.js"></script>
+
+<script>
+    window.onload = function() {
+        var notificationMessage = `{% include "includes/navbar.html" %}`; // Bu, navbar.html dosyasının içeriğini temsil eder
+        
+        if (notificationMessage.trim()) {
+            UIkit.notification({
+                message: notificationMessage,
+                status: 'primary',
+                pos: 'top-right',
+                timeout: 5000,
+                cls: 'my-notification' // Özel stil sınıfınızı burada tanımlayın
+            });
+        }
+    };
+</script>
+
+{% block scriptox %}
+{% endblock scriptox %}
+</html>

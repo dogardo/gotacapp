@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block styles %}
+<style>
+  /* Saydam siyah blok stil */
+  .grid-item {
+      position: relative;
+      max-height: 250px;
+      overflow: hidden;
+  }
+
+  .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 45%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.4); /* Siyah arka plan */
+      display: flex;
+      flex-direction: column; /* İç içe simgeleri alt alta yerleştirmek için */
+      align-items: center;
+      justify-content: center;
+  }
+
+  /* Görsel üzerine karartma eklemek için ::before pseudo-elementi */
+  .uk-background-cover::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.2); /* Görseli biraz karartmak için arka plan rengi */
+  }
+
+  /* Yazı */
+  .overlay h4 {
+      margin: 0;
+      color: #fff; /* Beyaz yazı rengi */
+      font-family: "Arial", sans-serif;
+      font-weight: normal;
+  }
+
+  /* Simgeler */
+  .overlay img {
+      max-width: 100px;
+      margin: 5px 0;
+  }
+</style>
+{% endblock styles %}
+
+{% block body1 %}
+<div class="grid-container">
+  {% if shuffled.all.count != 0 %}
+    {% for value in shuffled %}
+      <div class="grid-item">
+        <div class="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light relative" style="background-image: url('{{ value.pic.url }}');" data-src="{{ value.pic.url }}" uk-img>
+          <!-- Saydam siyah blok -->
+          <div class="overlay">
+            <h4># {{ value }}</h4>
+            <div style="margin-top: 30px;"></div>
+            <a href="" uk-icon="bookmark"></a>
+            <!-- İkonları istediğiniz kadar ekleyebilirsiniz -->
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  {% endif %}
+</div>
+{% endblock body1 %}
